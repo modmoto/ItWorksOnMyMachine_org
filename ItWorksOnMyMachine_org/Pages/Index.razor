@@ -19,11 +19,61 @@
     
     <div class="d-flex justify-content-center">
         <div class="col-lg-3 col-md-6">
-            <input class="form-control" type="file" id="formFile">
+            <InputFile disabled="@_uploading" accept=".gif,.png,.jpg,.svg,.bmp,.webp" class="form-control" OnChange="@LoadFiles" />
+            @if (_uploading)
+            {
+                <p class="lead mt-5">
+                    Uploading...
+                </p>
+            }
+            @if (_fileTooBig)
+            {
+                <div class="alert alert-danger" role="alert">
+                    file too big (max 5mb)
+                </div>
+            }
         </div>
     </div>
     
     <div class="d-flex justify-content-center">
         <div class="small mt-5 col-lg-3 col-md-6">Disclaimer: the release has some weird issues right now, so the upload is a little flaky. It was working locally so if you have any issues, rest assured that it is basically done. We already showed it in the review and will do the remaining fixes next sprint, when there will be less pressure. ¯\_(ツ)_/¯</div>    
     </div>
+    
+    <p class="mt-5 lead">
+        Certified projects: @_imageCount
+    </p>
 </div>
+
+@inject ImageRepository ImageRepository
+@inject NavigationManager NavigationManager
+
+@code {
+    private long _imageCount;
+    private bool _uploading;
+    private bool _fileTooBig;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _imageCount = await ImageRepository.Count();
+    }
+
+    private async void LoadFiles(InputFileChangeEventArgs e)
+    {
+        _uploading = true;
+        _fileTooBig = false;
+        var memoryStream = new MemoryStream();
+        try
+        {
+            await e.File.OpenReadStream(5 * 1024 * 1024).CopyToAsync(memoryStream);
+            var inputAsString = Convert.ToBase64String(memoryStream.ToArray());
+            var certifiedImage = CertifiedImage.Create(inputAsString, e.File.ContentType);
+            await ImageRepository.Insert(certifiedImage);
+            NavigationManager.NavigateTo($"{certifiedImage.Id}");  
+        }
+        catch (IOException)
+        {
+            _fileTooBig = true;
+            _uploading = false;
+        }
+    }
+}

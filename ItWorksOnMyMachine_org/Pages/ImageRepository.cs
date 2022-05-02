@@ -1,4 +1,3 @@
-using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace ItWorksOnMyMachine_org.Pages
@@ -13,47 +12,42 @@ namespace ItWorksOnMyMachine_org.Pages
             _mongoClient = mongoClient;
         }
 
-        protected IMongoDatabase CreateClient()
+        private IMongoDatabase CreateClient()
         {
             var database = _mongoClient.GetDatabase(DatabaseName);
             return database;
         }
 
-        protected Task<CertifiedImage> Load(ObjectId id)
+        public Task<CertifiedImage> Load(Guid id)
         {
             var mongoCollection = CreateCollection();
             return mongoCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
         }
 
-        protected Task Insert(CertifiedImage element)
+        public Task Insert(CertifiedImage element)
         {
             var mongoCollection = CreateCollection();
             return mongoCollection.InsertOneAsync(element);
         }
 
-        protected Task<long> Count()
+        public Task<long> Count()
         {
             var mongoCollection = CreateCollection();
             return mongoCollection.CountDocumentsAsync(_ => true);
         }
 
-        protected IMongoCollection<CertifiedImage> CreateCollection()
+        private IMongoCollection<CertifiedImage> CreateCollection()
         {
             var mongoDatabase = CreateClient();
             var mongoCollection = mongoDatabase.GetCollection<CertifiedImage>(typeof(CertifiedImage).Name);
             return mongoCollection;
         }
 
-        protected async Task Delete(ObjectId id)
+        public async Task Delete(Guid id)
         {
             var mongoDatabase = CreateClient();
             var mongoCollection = mongoDatabase.GetCollection<CertifiedImage>(typeof(CertifiedImage).Name);
             await mongoCollection.DeleteOneAsync(i => i.Id == id);
         }
-    }
-
-    public class CertifiedImage
-    {
-        public ObjectId Id { get; set; }
     }
 }
