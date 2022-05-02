@@ -12,7 +12,7 @@
         <div>
             <img src="@($"data:{_certifiedImage.ContentType};base64, {_certifiedImage.Content}")" style="max-width: 75%"/>
             <p class="mt-5 lead">
-                Certified on @_certifiedImage.SigningDate.ToString("f")
+                Certified on <ToLocal DateTime="@_certifiedImage.SigningDate" Format="dd mmm yyyy HH:MM:ss"></ToLocal>
             </p>
         </div>
     }
