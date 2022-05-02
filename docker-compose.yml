@@ -1,6 +1,6 @@
 ﻿version: '3.9'
 services:
-  fading-flame:
+  it-works-on-my-machine-org:
     image: modmoto/it-works-on-my-machine-org:${TAG}
     container_name: it-works-on-my-machine-org-${CONTAINER_SUFFIX}
     restart: unless-stopped
