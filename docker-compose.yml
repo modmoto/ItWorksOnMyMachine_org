@@ -20,7 +20,7 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=admin
       - MONGO_INITDB_ROOT_PASSWORD=${DB_SECRET}
     volumes:
-      - mongo-db-fading-flame:/data/db
+      - mongo-db-it-works-on-my-machine-org:/data/db
   
 networks:
   default:
@@ -28,5 +28,5 @@ networks:
       name: caddy
 
 volumes:
-  mongo-db-fading-flame:
+  mongo-db-it-works-on-my-machine-org:
     name: mongo-db-it-works-on-my-machine-org-${CONTAINER_SUFFIX}
