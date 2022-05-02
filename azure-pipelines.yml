@@ -4,12 +4,6 @@ pool:
   vmImage: "ubuntu-20.04"
 
 steps:
-  - task: qetza.replacetokens.replacetokens-task.replacetokens@3
-    displayName: 'Replace tokens'
-    inputs:
-      targetFiles: |
-        **/*.token.yml => *.yml
-
   - task: UseDotNet@2
     inputs:
       packageType: 'sdk'
@@ -26,24 +20,11 @@ steps:
     inputs:
       command: 'build'
       
-  - task: CmdLine@2
-    displayName: 'start mongo daemon'
-    inputs:
-      script: 'sudo systemctl start mongod'
-
-  - task: DotNetCoreCLI@2
-    displayName: 'unit tests'
-    env:
-      TESTING_MONGO_CONNECTION_STRING: 'mongodb://127.0.0.1:27017'
-    inputs:
-      command: 'test'
-      projects: '**/*Tests.csproj'
-
   - task: Docker@2
     condition: eq(variables['Build.Reason'], 'IndividualCI')
     inputs:
       containerRegistry: 'official-docker-modmoto'
-      repository: 'modmoto/fading-flame'
+      repository: 'modmoto/it-works-on-my-machine-org'
       command: 'buildAndPush'
       Dockerfile: '**/Dockerfile'
       buildContext: '.'

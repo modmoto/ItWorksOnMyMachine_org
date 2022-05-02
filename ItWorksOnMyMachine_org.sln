@@ -7,6 +7,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionFolder", "SolutionF
 		.dockerignore = .dockerignore
 		.gitignore = .gitignore
 		Dockerfile = Dockerfile
+		azure-pipelines.yml = azure-pipelines.yml
+		docker-compose.yml = docker-compose.yml
 	EndProjectSection
 EndProject
 Global
