@@ -12,7 +12,7 @@ public class CertifiedImage
         var image = await Image.LoadAsync(content);
         var imgNew = image.Clone(processingContext =>
         {
-            var waterMark = Image.Load("Pages/ribbon.png");
+            var waterMark = Image.Load($"{Directory.GetCurrentDirectory()}/wwwroot/ribbon.png");
             processingContext.DrawImage(waterMark, 0.8f);
         });
 
