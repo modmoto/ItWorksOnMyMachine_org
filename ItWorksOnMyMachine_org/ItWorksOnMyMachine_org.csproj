@@ -12,7 +12,9 @@
     </ItemGroup>
 
     <ItemGroup>
-      <None Include="wwwroot\Pages\ribbon.png" />
+      <None Include="wwwroot\Pages\ribbon.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>
