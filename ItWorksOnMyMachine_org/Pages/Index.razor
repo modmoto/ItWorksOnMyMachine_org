@@ -1,5 +1,4 @@
 ﻿@page "/"
-@using Images
 
 <div class="text-center mt-5">
     <h4 class="display-4">¯\_(ツ)_/¯</h4>
@@ -58,12 +57,9 @@
     {
         _uploading = true;
         _fileTooBig = false;
-        var memoryStream = new MemoryStream();
         try
         {
-            await e.File.OpenReadStream(5 * 1024 * 1024).CopyToAsync(memoryStream);
-            var inputAsString = Convert.ToBase64String(memoryStream.ToArray());
-            var certifiedImage = CertifiedImage.Create(inputAsString, e.File.ContentType);
+            var certifiedImage = await CertifiedImage.Create(e.File.OpenReadStream(5 * 1024 * 1024));
             await ImageRepository.Insert(certifiedImage);
             NavigationManager.NavigateTo($"{certifiedImage.Id}");  
         }

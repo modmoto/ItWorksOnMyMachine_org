@@ -7,10 +7,14 @@
 
     <ItemGroup>
       <PackageReference Include="BlazorTime" Version="1.0.3" />
+      <PackageReference Include="MongoDB.Driver" Version="2.15.0" />
+      <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="1.0.0-beta14" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Images\Images.csproj" />
+      <None Update="Pages\watermark.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>

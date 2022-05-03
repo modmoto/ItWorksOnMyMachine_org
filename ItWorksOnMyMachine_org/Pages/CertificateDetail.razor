@@ -1,5 +1,4 @@
 ﻿@page "/{Id}"
-@using Images
 
 <div class="text-center">
     <h6 class="display-6 my-3">
@@ -11,7 +10,7 @@
     @if (_certifiedImage != null)
     {
         <div>
-            <img src="@($"data:{_certifiedImage.ContentType};base64, {_certifiedImage.Content}")" style="max-width: 75%"/>
+            <img src="@_certifiedImage.Content" style="max-width: 75%"/>
             <p class="mt-5 lead">
                 Certified on <ToLocal DateTime="@_certifiedImage.SigningDate" Format="dd mmm yyyy HH:MM:ss"></ToLocal>
             </p>

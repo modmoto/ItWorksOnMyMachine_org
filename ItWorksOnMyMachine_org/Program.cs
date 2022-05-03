@@ -1,6 +1,5 @@
-using Images;
-using ItWorksOnMyMachine_org.Pages;
 using MongoDB.Driver;
+using ImageRepository = ItWorksOnMyMachine_org.Pages.ImageRepository;
 
 var builder = WebApplication.CreateBuilder(args);
 

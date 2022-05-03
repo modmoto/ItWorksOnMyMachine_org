@@ -1,6 +1,6 @@
 using MongoDB.Driver;
 
-namespace Images
+namespace ItWorksOnMyMachine_org.Pages
 {
     public class ImageRepository
     {
