@@ -1,6 +1,6 @@
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace ItWorksOnMyMachine_org.Pages;
+namespace Images;
 
 public class CertifiedImage
 {

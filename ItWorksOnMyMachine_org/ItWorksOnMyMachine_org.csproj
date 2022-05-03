@@ -7,7 +7,10 @@
 
     <ItemGroup>
       <PackageReference Include="BlazorTime" Version="1.0.3" />
-      <PackageReference Include="MongoDB.Driver" Version="2.15.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Images\Images.csproj" />
     </ItemGroup>
 
 </Project>
