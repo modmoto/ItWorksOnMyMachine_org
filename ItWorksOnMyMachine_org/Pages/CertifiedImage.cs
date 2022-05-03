@@ -12,8 +12,8 @@ public class CertifiedImage
         var image = await Image.LoadAsync(content);
         var imgNew = image.Clone(processingContext =>
         {
-            var waterMark = Image.Load("Pages/watermark.png");
-            processingContext.DrawImage(waterMark, 1);
+            var waterMark = Image.Load("Pages/ribbon.png");
+            processingContext.DrawImage(waterMark, 0.8f);
         });
 
         var base64String = imgNew.ToBase64String(PngFormat.Instance);
