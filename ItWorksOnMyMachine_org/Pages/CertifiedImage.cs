@@ -13,7 +13,7 @@ public class CertifiedImage
         var imgNew = image.Clone(processingContext =>
         {
             var waterMark = Image.Load("Pages/watermark.png");
-            processingContext.DrawImage(waterMark, 0.8f);
+            processingContext.DrawImage(waterMark, 1);
         });
 
         var base64String = imgNew.ToBase64String(PngFormat.Instance);
